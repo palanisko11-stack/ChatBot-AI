@@ -1,22 +1,1325 @@
-:root { --ink:#19221f; --muted:#74807a; --line:#e5ebe6; --paper:#fbfcfa; --panel:#fff; --accent:#db6e4c; --accent-dark:#bd5536; --soft:#f2f6f1; --shadow:0 18px 55px rgba(36,61,47,.08); }
-* { box-sizing:border-box; }
-body { margin:0; color:var(--ink); background:var(--paper); font-family:'DM Sans',sans-serif; }
-button,textarea { font:inherit; }
-button { cursor:pointer; }
-.app-shell { min-height:100vh; display:flex; }
-.sidebar { width:278px; border-right:1px solid var(--line); padding:31px 22px 23px; display:flex; flex-direction:column; background:#f8faf7; }
-.brand,.mobile-brand { display:flex; align-items:center; gap:10px; font:600 20px 'Space Grotesk',sans-serif; letter-spacing:-.6px; }
-.brand-mark { display:inline-grid; place-items:center; width:31px; height:31px; color:#fff; background:var(--accent); border-radius:10px; font-size:17px; box-shadow:0 6px 15px #db6e4c40; }
-.brand-accent { color:var(--accent); }
-.new-chat { border:0; background:var(--ink); color:white; border-radius:12px; margin:47px 0 36px; padding:14px; font-weight:600; text-align:left; transition:.2s; }
-.new-chat:hover { background:var(--accent); transform:translateY(-1px); }.new-chat span { font-size:20px; margin-right:9px; vertical-align:-1px; }
-.side-label { color:#9aa49d; font-size:11px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; margin:0 0 11px 10px; }
-.side-link { width:100%; border:0; background:transparent; color:#68736d; border-radius:9px; padding:11px 10px; text-align:left; display:flex; gap:12px; align-items:center; font-size:14px; margin:3px 0; }.side-link span:first-child { font-size:18px; width:19px; text-align:center; }.side-link:hover,.side-link.active { background:#eaf0eb; color:var(--ink); }.side-link.active { font-weight:600; }
-.sidebar-bottom { margin-top:auto; }.privacy-note { display:flex; gap:10px; padding:15px 10px; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin-bottom:12px; }.privacy-note strong,.privacy-note small { display:block; }.privacy-note strong { font-size:12px; }.privacy-note small { color:var(--muted); font-size:10px; line-height:1.5; margin-top:3px; }.status-dot { display:inline-block; background:#5eb780; width:7px; height:7px; border-radius:50%; box-shadow:0 0 0 4px #5eb7801e; flex:none; margin-top:5px; }
-.chat-area { flex:1; display:flex; flex-direction:column; min-width:0; }.topbar { height:82px; display:flex; align-items:center; justify-content:flex-end; padding:0 7%; }.mode-pill { color:#849089; border:1px solid var(--line); border-radius:20px; padding:8px 13px; font-size:11px; display:flex; align-items:center; gap:8px; }.mode-pill .status-dot { margin:0; width:6px; height:6px; }.mobile-brand { display:none; }
-.conversation { width:min(850px,90%); margin:auto; flex:1; padding:30px 0 40px; overflow:auto; }.welcome { text-align:center; max-width:690px; margin:6vh auto 0; }.welcome-orb { margin:0 auto 27px; display:grid; place-items:center; width:62px; height:62px; color:var(--accent); background:#f8e7df; border-radius:22px; font-size:29px; transform:rotate(12deg); }.welcome-orb span { transform:rotate(-12deg); }.eyebrow { color:var(--accent); font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; }.welcome h1 { font:600 clamp(34px,5vw,54px)/1.07 'Space Grotesk',sans-serif; letter-spacing:-2.5px; margin:14px 0 18px; }.welcome h1 em { color:var(--accent); font-style:normal; }.welcome-copy { color:var(--muted); font-size:15px; line-height:1.7; max-width:470px; margin:auto; }.suggestions { display:flex; flex-wrap:wrap; justify-content:center; gap:9px; margin-top:34px; }.suggestion { border:1px solid var(--line); background:var(--panel); color:#52605a; border-radius:30px; padding:11px 15px; font-size:12px; transition:.2s; }.suggestion span { color:var(--accent); font-size:16px; margin-right:6px; vertical-align:-1px; }.suggestion:hover { border-color:#efb6a4; color:var(--accent-dark); transform:translateY(-2px); }
-.message { display:flex; gap:14px; margin:22px 0; animation:appear .3s ease both; }.message.user { justify-content:flex-end; }.avatar { width:30px; height:30px; border-radius:10px; display:grid; place-items:center; background:var(--ink); color:#fff; font-size:13px; flex:none; }.message.ai .avatar { background:#f8e7df; color:var(--accent); }.bubble { max-width:min(650px,80%); padding:13px 17px; border-radius:17px; background:var(--soft); color:#33403a; line-height:1.65; font-size:14px; white-space:pre-wrap; }.user .bubble { background:var(--ink); color:#fff; border-bottom-right-radius:4px; }.ai .bubble { border-bottom-left-radius:4px; }.typing { display:flex; gap:4px; align-items:center; min-width:55px; }.typing i { width:5px; height:5px; border-radius:50%; background:var(--accent); animation:bounce 1s infinite; }.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
-.composer-wrap { width:min(850px,90%); margin:0 auto; padding-bottom:25px; }.composer { background:#fff; border:1px solid #dfe7e0; border-radius:17px; padding:14px 14px 10px 18px; box-shadow:var(--shadow); transition:.2s; }.composer:focus-within { border-color:#c2d5c7; box-shadow:0 18px 60px rgba(36,61,47,.13); }.composer textarea { border:0; outline:0; resize:none; width:100%; color:var(--ink); min-height:27px; max-height:140px; line-height:1.5; }.composer textarea::placeholder { color:#a4aea7; }.composer-actions { display:flex; justify-content:space-between; align-items:center; margin-top:8px; }.hint,.disclaimer { color:#a6afa9; font-size:10px; }.send-btn { border:0; width:35px; height:35px; border-radius:11px; color:white; background:var(--accent); font-size:20px; transition:.2s; }.send-btn:hover { background:var(--accent-dark); transform:translateY(-2px); }.disclaimer { text-align:center; margin:12px 0 0; }
-@keyframes appear { from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none} } @keyframes bounce { 0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)} }
-@media (max-width:700px) { .sidebar { display:none; }.topbar { height:68px; padding:0 5%; justify-content:space-between; }.mobile-brand { display:flex; font-size:17px; }.mobile-brand .brand-mark { width:27px;height:27px;font-size:14px; }.conversation { width:90%; padding-top:15px; }.welcome { margin-top:8vh; }.welcome h1 { letter-spacing:-1.5px; }.welcome-copy { font-size:14px; }.suggestions { flex-direction:column; align-items:stretch; }.suggestion { text-align:left; }.composer-wrap { width:90%; }.hint { display:none; } }
-@media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; } }
+const API_URL = 'http://localhost:5000';
+const KEY = 'chatbot-ai-history';
+const themeKey = 'chatbot-ai-theme';
+const input = document.querySelector('#messageInput');
+const conversation = document.querySelector('#conversation');
+const welcome = document.querySelector('#welcome');
+const sendButton = document.querySelector('#sendButton');
+const sourcePanel = document.querySelector('#sourcePanel');
+const sourceList = document.querySelector('#sourceList');
+let messages = JSON.parse(localStorage.getItem(KEY) || '[]');
+
+function save() {
+  localStorage.setItem(KEY, JSON.stringify(messages));
+}
+
+function scrollDown() {
+  conversation.scrollTo({ top: conversation.scrollHeight, behavior: 'smooth' });
+}
+
+function renderSources(sources) {
+  if (!sourcePanel || !sourceList) return;
+
+  if (!sources || !sources.length) {
+    sourcePanel.hidden = true;
+    sourceList.innerHTML = '';
+    return;
+  }
+
+  sourcePanel.hidden = false;
+  sourceList.innerHTML = sources
+    .map((source, index) => `
+      <li>
+        <strong>[${index + 1}] ${source.topic || 'Znalost'}</strong><br>
+        ${source.text ? source.text.slice(0, 220) + (source.text.length > 220 ? '…' : '') : 'Bez textu'}<br>
+        <span>${source.source || 'interní-korpus'}</span>
+      </li>
+    `)
+    .join('');
+}
+
+function addMessage(role, text, persist = true, sources = []) {
+  if (welcome) welcome.style.display = 'none';
+
+  const row = document.createElement('div');
+  row.className = `message ${role}`;
+
+  const avatar = document.createElement('div');
+  avatar.className = 'avatar';
+  avatar.textContent = role === 'ai' ? '✦' : 'Vy';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.textContent = text;
+
+  if (role === 'user') {
+    row.append(bubble, avatar);
+  } else {
+    row.append(avatar, bubble);
+  }
+
+  conversation.appendChild(row);
+
+  if (persist) {
+    messages.push({ role, text, sources });
+    save();
+  }
+
+  if (sources && sources.length) {
+    renderSources(sources);
+  } else if (role === 'ai') {
+    renderSources([]);
+  }
+
+  scrollDown();
+}
+
+function showTyping() {
+  const row = document.createElement('div');
+  row.className = 'message ai';
+  row.id = 'typing';
+  row.innerHTML = '<div class="avatar">✦</div><div class="bubble typing"><i></i><i></i><i></i></div>';
+  conversation.appendChild(row);
+  scrollDown();
+}
+
+function demoReply(text) {
+  const t = text.toLowerCase();
+  if (t.includes('backprop') || t.includes('gradient')) return 'Backpropagation pracuje tak, že model v průchodu vpřed spočítá chybu a pak v průchodu zpět propočítá gradienty. Ty říkají, jak upravit váhy, aby ztráta klesla.';
+  if (t.includes('transform') || t.includes('attention')) return 'Transformer používá self-attention. Každý token se porovnává s ostatními a váží, které informace jsou pro něj důležité. To umožňuje pracovat s dlouhým kontextem lépe než klasické RNN.';
+  if (t.includes('gguf') || t.includes('kvantiz')) return 'GGUF je formát modelu běžně používaný v llama.cpp. Kvantizace snižuje přesnost váh pro úsporu paměti a výkonu, což umožňuje spouštět velké modely i na slabším hardware.';
+  if (t.includes('ahoj') || t.includes('čau')) return 'Ahoj! Jsem rád, že jste tady. Co dnes chcete řešit nebo prozkoumat?';
+  return 'To je zajímavé. Rozdělme to na menší kroky a nejdřív si přesně určíme hlavní otázku, pak z ní odvodíme nejvhodnější odpověď.';
+}
+
+async function generateReply(text) {
+  try {
+    const response = await fetch(`${API_URL}/api/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: text,
+        max_tokens: 180,
+        temperature: 0.3
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`Backend returned ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (data.reply) {
+      return { answer: data.reply, sources: data.sources || [] };
+    }
+
+    return { answer: demoReply(text), sources: [] };
+  } catch (error) {
+    console.warn('Backend unavailable, using demo mode:', error);
+    return { answer: demoReply(text), sources: [] };
+  }
+}
+
+function renderHistory() {
+  messages.forEach((m) => addMessage(m.role, m.text, false, m.sources || []));
+}
+
+async function send() {
+  const text = input.value.trim();
+  if (!text) return;
+
+  addMessage('user', text, true, []);
+  input.value = '';
+  input.style.height = 'auto';
+  showTyping();
+
+  const result = await generateReply(text);
+  const typingEl = document.querySelector('#typing');
+  if (typingEl) typingEl.remove();
+
+  addMessage('ai', result.answer, true, result.sources || []);
+}
+
+input.addEventListener('input', () => {
+  input.style.height = 'auto';
+  input.style.height = `${Math.min(input.scrollHeight, 140)}px`;
+});
+
+input.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter' && !event.shiftKey) {
+    event.preventDefault();
+    send();
+  }
+});
+
+sendButton.addEventListener('click', send);
+
+document.querySelectorAll('.suggestion').forEach((button) => {
+  button.addEventListener('click', () => {
+    input.value = button.dataset.prompt;
+    input.focus();
+  });
+});
+
+document.querySelector('#newChat').addEventListener('click', () => {
+  messages = [];
+  save();
+  conversation.querySelectorAll('.message').forEach((el) => el.remove());
+  renderSources([]);
+  if (welcome) welcome.style.display = '';
+  input.focus();
+});
+
+document.querySelector('#exportChat').addEventListener('click', () => {
+  const text = messages.map((m) => `${m.role === 'user' ? 'Vy' : 'ChatBot-AI'}:\n${m.text}`).join('\n\n');
+  const blob = new Blob([text || 'Konverzace je zatím prázdná.'], { type: 'text/plain;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'chatbot-ai-konverzace.txt';
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+
+const toggle = document.querySelector('#themeToggle');
+const label = document.querySelector('#themeLabel');
+
+function setTheme(dark) {
+  document.body.classList.toggle('dark', dark);
+  label.textContent = dark ? 'Světlý vzhled' : 'Tmavý vzhled';
+  localStorage.setItem(themeKey, dark ? 'dark' : 'light');
+}
+
+toggle.addEventListener('click', () => {
+  setTheme(!document.body.classList.contains('dark'));
+});
+
+if (localStorage.getItem(themeKey) === 'dark') {
+  setTheme(true);
+}
+
+renderHistory();
+renderSources([]);
+
+if (messages.length === 0 && welcome) {
+  welcome.style.display = '';
+}
+
+const initialMessage = 'Jak funguje neuronová síť a backpropagation?';
+if (messages.length === 0) {
+  input.value = initialMessage;
+}
+
+window.addEventListener('load', () => {
+  if (!messages.length) {
+    input.focus();
+  }
+});
+
+console.log('ChatBot-AI frontend ready. Backend endpoint:', API_URL);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+
+
+
+
+
+n
+
+\n\n";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+
+
+
+n
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+n
+
+
+n
+
+n
+
+n
+
+n
+
+n
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+
+n
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"}]}},{
