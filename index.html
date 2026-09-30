@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ChatBot-AI — klidný, chytrý a soukromý prostor pro vaše nápady.">
+  <title>ChatBot-AI — váš prostor pro myšlenky</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navigace aplikace">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✦</span><span>ChatBot<span class="brand-accent">-AI</span></span></div>
+      <button class="new-chat" id="newChat"><span>＋</span> Nová konverzace</button>
+      <div class="side-section">
+        <p class="side-label">Prostor pro vás</p>
+        <button class="side-link active"><span>▱</span> Aktuální chat</button>
+        <button class="side-link" id="exportChat"><span>↗</span> Exportovat chat</button>
+      </div>
+      <div class="sidebar-bottom">
+        <div class="privacy-note"><span class="status-dot"></span><div><strong>Soukromý režim</strong><small>Data jsou pouze ve vašem prohlížeči.</small></div></div>
+        <button class="side-link" id="themeToggle"><span>☼</span> <span id="themeLabel">Světlý vzhled</span></button>
+      </div>
+    </aside>
+
+    <main class="chat-area">
+      <header class="topbar"><div class="mobile-brand"><span class="brand-mark">✦</span> ChatBot<span class="brand-accent">-AI</span></div><div class="mode-pill"><span class="status-dot"></span> Demo režim</div></header>
+      <section class="conversation" id="conversation" aria-live="polite">
+        <div class="welcome" id="welcome">
+          <div class="welcome-orb" aria-hidden="true"><span>✦</span></div>
+          <p class="eyebrow">Vítejte ve vašem prostoru</p>
+          <h1>Myšlenky bez hranic.<br><em>Začněme společně.</em></h1>
+          <p class="welcome-copy">Jsem váš kreativní partner pro otázky, nápady i chvíle, kdy nevíte, kde začít.</p>
+          <div class="suggestions" aria-label="Návrhy otázek">
+            <button class="suggestion" data-prompt="Pomoz mi vymyslet kreativní projekt"><span>◌</span> Vymyslet kreativní projekt</button>
+            <button class="suggestion" data-prompt="Vysvětli mi něco složitého jednoduše"><span>⊙</span> Vysvětlit složité jednoduše</button>
+            <button class="suggestion" data-prompt="Pomoz mi naplánovat můj den"><span>◷</span> Naplánovat můj den</button>
+          </div>
+        </div>
+      </section>
+      <footer class="composer-wrap">
+        <div class="composer" id="composerBox">
+          <textarea id="messageInput" rows="1" placeholder="Napište, co máte na mysli..." aria-label="Vaše zpráva"></textarea>
+          <div class="composer-actions"><span class="hint">Enter odešle · Shift + Enter nový řádek</span><button class="send-btn" id="sendButton" aria-label="Odeslat zprávu">↑</button></div>
+        </div>
+        <p class="disclaimer">ChatBot-AI může dělat chyby. Odpovědi si vždy ověřte.</p>
+      </footer>
+    </main>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
